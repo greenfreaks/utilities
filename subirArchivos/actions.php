@@ -10,7 +10,7 @@ function insert(){
     global $con;
     // $id_insert = $con->insert_id;
     // $ruta = 'files/ ' . $id_insert . '/';
-    $ruta = 'files/ ';
+    $ruta = 'files/';
     $nombre = $_POST['nombre'];
     $archivo = $ruta . $_FILES['archivo']['name'];
 
@@ -38,28 +38,36 @@ function insert(){
 }
 
 function edit(){
-
     global $con;
-    $id_editar = $_POST['editar_id'];
-    $ruta_editar = 'files/' . $id_editar . '/';
-    $nombre_editar = $_POST['editar_nombre'];
-    $archivo_editar = $ruta_editar . $_FILES['editar_archivo']['name'];
-    if (!file_exists($ruta_editar)) {
-        mkdir($ruta_editar);
+    // $id_insert = $con->insert_id;
+    // $ruta = 'files/ ' . $id_insert . '/';
+    $id = $_POST['id'];
+    $ruta = 'files/';
+    $nombre = $_POST['nombre'];
+    $archivo = $ruta . $_FILES['archivo']['name'];
+    if($archivo == 'files/'){
+        $archivo = "";
     }
-    if (!file_exists($archivo_editar)) {
-        $resultado_editar = @move_uploaded_file($_FILES['archivo_editar']['tmp_name'], $archivo_editar);
-        if ($resultado_editar) {
-            echo "Archivo Editado";
+
+    if (!file_exists($ruta)) {
+        mkdir($ruta);
+    }
+    if (!file_exists($archivo)) {
+        $resultado = @move_uploaded_file($_FILES['archivo']['tmp_name'], $archivo);
+        if ($resultado) {
+            echo "Archivo Guardado";
         } else {
-            echo "Error al editar";
+            echo "Error";
         }
+    } else {
+        echo "El archivo ya existe";
     }
-    $query_editar = "UPDATE archivo SET archivo = '$archivo_editar' WHERE id = '$id_editar'";
-    $exec_editar = mysqli_query($con, $query_editar);
-    if($exec_editar){
+
+    $query = "UPDATE archivo SET nombre = '$nombre', archivo = '$archivo' WHERE id = '$id'";
+    $exec = mysqli_query($con, $query);
+    if ($exec) {
         echo "Success";
-    }else{
+    } else {
         echo "Failed";
     }
 }

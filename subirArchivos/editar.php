@@ -16,10 +16,11 @@ $tabla = mysqli_fetch_assoc($exec_tabla);
 
 <body>
     <form action="actions.php" method="POST" enctype="multipart/form-data">
-        <input type="text" name="editar_id" disabled value="<?php echo $tabla['id'] ?>"> <br> <br>
-        <input type="text" name="editar_nombre" value="<?php echo $tabla['nombre'] ?>"> <br> <br>
-        <input type="file" name="editar_archivo" value="<?php echo $tabla['archivo'] ?>"> <br> <br>
-        <input type="submit" name="editar">
+        <input type="text" name="id" value="<?php echo $tabla['id'] ?>"> <br> <br>
+        <input type="text" name="nombre" value="<?php echo $tabla['nombre'] ?>"> <br> <br>
+        <input type="file" id="archivo" name="archivo" value="<?php echo $tabla['archivo'] ?>"> <br> <br>
+        <button id="clear">clear</button>
+        <input type="submit" id="btnEditar" name="editar">
     </form>
 
     <script src="script.js"></script>

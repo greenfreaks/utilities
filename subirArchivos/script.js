@@ -1,7 +1,6 @@
 $(document).ready(function(){
-    $('.delete').click(function(){
-        var parent = $(this).parent().attr('id');
-        var service = $(this).parent().attr('data');
-        var dataString
-    })
+    let clear = $('#clear').on("click", function(e){
+        e.preventDefault();
+        alert("a");
+    });
 });
