@@ -10,10 +10,13 @@
 </head>
 
 <body>
-    <form action="actions.php" method="POST" enctype="multipart/form-data">
-        <input type="text" name="nombre"> <br> <br>
-        <input type="file" name="archivo"> <br> <br>
-        <input type="submit" name="submit">
+    <form method="post" enctype="multipart/form-data">
+        <input type="text" id="nombre" name="nombre"> <br> <br>
+        <input type="file" id="archivo" name="archivo"> <br> <br>
+        <input type="submit" id="submit" name="submit">
+        <!-- <button id="submit">Enviar</button> -->
+        <?php require "actions.php"?>
+      
     </form>
 
     <table>
@@ -25,21 +28,25 @@
             </tr>
         </thead>
         <tbody>
-            <?php 
-                $query_tabla = "SELECT * FROM archivo";
-                $exec_tabla = mysqli_query($con, $query_tabla);
-                while($tabla = mysqli_fetch_assoc($exec_tabla)){?>
+            <?php
+            $query_tabla = "SELECT * FROM archivo";
+            $exec_tabla = mysqli_query($con, $query_tabla);
+            while ($tabla = mysqli_fetch_assoc($exec_tabla)) { ?>
                 <tr>
-                    <td><?php echo $tabla['nombre']?></td>
-                    <td> <a target="_blank" href="<?php echo $tabla['archivo']?>">Ver</a></td>
+                    <td><?php echo $tabla['nombre'] ?></td>
+                    <td> <a target="_blank" href="<?php echo $tabla['archivo'] ?>">Ver</a></td>
                     <td><a href="editar.php?id=<?php echo $tabla['id'] ?>"> Editar</a>
-                        <a href="eliminar.php">Eliminar</a></td>
+                        <a href="eliminar.php">Eliminar</a>
+                    </td>
                 </tr>
-                <?php
-                }
+            <?php
+            }
             ?>
         </tbody>
     </table>
 </body>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous">
+</script>
+<script src="script.js"></script>
 </html>
